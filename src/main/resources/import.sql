@@ -3,3 +3,6 @@
 insert into pessoa (id, nome, cpf) values(1, 'Tarantino', '111');
 insert into pessoa (id, nome, cpf) values(2, 'Darth Vader', '222');
 insert into pessoa (id, nome, cpf) values(3, 'Van gogh ', '333');
+
+insert into estado (nome, sigla) values('Tocantins', 'TO');
+insert into estado (nome, sigla) values('Pará', 'PA');

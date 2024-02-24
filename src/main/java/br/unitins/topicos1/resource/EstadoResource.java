@@ -8,20 +8,24 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @Path("/estados")
 public class EstadoResource {
     @Inject
     public EstadoRepository estadoRepository;
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public Estado findById(@PathParam("id") Long id){
+        return estadoRepository.findById(id);
+    }
+
+    @GET
     public List<Estado> findAll(){
         return estadoRepository.listAll();
     }
-
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     public void create (Estado estado){
         estadoRepository.persist(estado);

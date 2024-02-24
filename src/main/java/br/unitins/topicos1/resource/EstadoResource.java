@@ -22,12 +22,42 @@ public class EstadoResource {
     }
 
     @GET
+    @Path("/search/nome/{nome}")
+    public List<Estado> findByNome(@PathParam("nome") String nome){
+        return estadoRepository.findByNome(nome);
+    }
+
+    @GET
+    @Path("/search/sigla/{sigla}")
+    public List<Estado> findBySigla(@PathParam("sigla") String sigla){
+        return estadoRepository.findBySigla(sigla);
+    }
+
+    @GET
     public List<Estado> findAll(){
         return estadoRepository.listAll();
     }
+
     @POST
     @Transactional
-    public void create (Estado estado){
+    public Estado create (Estado estado){
         estadoRepository.persist(estado);
+        return estado;
+    }
+
+    @PUT
+    @Transactional
+    @Path("/{id}")
+    public void update(@PathParam("id") Long id, Estado estado){
+        Estado estadoBanco = estadoRepository.findById(id);
+        estadoBanco.setNome(estado.getNome());
+        estadoBanco.setSigla(estado.getSigla());
+    }
+
+    @DELETE
+    @Transactional
+    @Path("/{id}")
+    public void delete(@PathParam("id") Long id){
+        estadoRepository.deleteById(id);
     }
 }

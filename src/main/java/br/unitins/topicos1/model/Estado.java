@@ -33,6 +33,6 @@ public class Estado {
     }
 
     public void setSigla(String sigla) {
-        sigla = sigla;
+        this.sigla = sigla;
     }
 }

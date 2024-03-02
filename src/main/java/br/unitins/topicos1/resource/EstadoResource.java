@@ -43,8 +43,8 @@ public class EstadoResource {
     @Transactional
     public Estado create (EstadoDTO dto){
         Estado estado = new Estado();
-        estado.setNome(dto.getNome());
-        estado.setSigla(dto.getSigla());
+        estado.setNome(dto.nome());
+        estado.setSigla(dto.sigla());
 
         estadoRepository.persist(estado);
         return estado;

@@ -1,5 +1,6 @@
 package br.unitins.topicos1.resource;
 
+import br.unitins.topicos1.dto.EstadoDTO;
 import br.unitins.topicos1.model.Estado;
 import br.unitins.topicos1.repository.EstadoRepository;
 import jakarta.inject.Inject;
@@ -40,7 +41,11 @@ public class EstadoResource {
 
     @POST
     @Transactional
-    public Estado create (Estado estado){
+    public Estado create (EstadoDTO dto){
+        Estado estado = new Estado();
+        estado.setNome(dto.getNome());
+        estado.setSigla(dto.getSigla());
+
         estadoRepository.persist(estado);
         return estado;
     }

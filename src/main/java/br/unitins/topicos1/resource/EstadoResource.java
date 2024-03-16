@@ -1,10 +1,11 @@
 package br.unitins.topicos1.resource;
 
 import br.unitins.topicos1.dto.EstadoDTO;
-import br.unitins.topicos1.dto.EstadoResponseDTO;
 import br.unitins.topicos1.service.EstadoService;
 
+import jakarta.enterprise.inject.build.compatible.spi.Validation;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -56,7 +57,7 @@ public class EstadoResource {
     }
 
     @POST
-    public Response create (EstadoDTO dto){
+    public Response create (@Valid EstadoDTO dto){
         return Response
                 .status(201).entity(estatdoService.create(dto))
                 .build();

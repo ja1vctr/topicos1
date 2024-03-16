@@ -2,6 +2,7 @@ package br.unitins.topicos1.model;
 
 import br.unitins.topicos1.dto.EstadoResponseDTO;
 import jakarta.persistence.*;
+import jdk.jfr.Name;
 
 @Entity
 public class Cidade {

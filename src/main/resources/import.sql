@@ -7,6 +7,6 @@ insert into pessoa (id, nome, cpf) values(3, 'Van gogh ', '333');
 insert into estado (nome, sigla) values('Tocantins', 'TO');
 insert into estado (nome, sigla) values('Pará', 'PA');
 
-insert into cidade (nome, id_estado) values('Palmas', 1);
-insert into cidade (nome, id_estado) values('Paraíso', 1);
-insert into cidade (nome, id_estado) values('Goiânia', 2);
+insert into cidade (nome, idEstado) values('Palmas', 1);
+insert into cidade (nome, idEstado) values('Paraíso', 1);
+insert into cidade (nome, idEtado) values('Goiânia', 2);

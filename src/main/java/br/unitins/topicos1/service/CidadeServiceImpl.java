@@ -4,11 +4,13 @@ import br.unitins.topicos1.dto.CidadeDTO;
 import br.unitins.topicos1.dto.CidadeResponseDTO;
 import br.unitins.topicos1.model.Cidade;
 import br.unitins.topicos1.repository.CidadeRepository;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 import java.util.List;
-
+@ApplicationScoped
 public class CidadeServiceImpl implements CidadeService{
     @Inject
     CidadeRepository cidadeRepository;
@@ -46,6 +48,7 @@ public class CidadeServiceImpl implements CidadeService{
     }
 
     @Override
+    @Transactional
     public CidadeResponseDTO create(@Valid CidadeDTO dto) {
         Cidade cidade = new Cidade();
         cidade.setNome(dto.nome());
@@ -55,12 +58,14 @@ public class CidadeServiceImpl implements CidadeService{
     }
 
     @Override
+    @Transactional
     public void update(Long id, CidadeDTO dto) {
         Cidade cidadeBanco = cidadeRepository.findById(id);
         cidadeBanco.setNome(dto.nome());
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         cidadeRepository.deleteById(id);
     }

@@ -50,21 +50,34 @@ public class EstadoServiceImpl implements EstadoService{
 
     @Override
     public EstadoResponseDTO findById(Long id) {
+
         return EstadoResponseDTO.valueOf(estadoRepository.findById(id));
     }
 
     @Override
     public List<EstadoResponseDTO> findAll() {
-        return estadoRepository.listAll().stream().map(estado -> EstadoResponseDTO.valueOf(estado)).toList();
+        return estadoRepository
+                .listAll()
+                .stream()
+                .map(estado -> EstadoResponseDTO.valueOf(estado))
+                .toList();
     }
 
     @Override
     public List<EstadoResponseDTO> findByNome(String nome) {
-        return estadoRepository.findByNome(nome).stream().map(estado-> EstadoResponseDTO.valueOf(estado)).toList();
+        return estadoRepository
+                .findByNome(nome)
+                .stream()
+                .map(estado-> EstadoResponseDTO.valueOf(estado))
+                .toList();
     }
 
     @Override
     public List<EstadoResponseDTO> findBySigla(String sigla) {
-        return estadoRepository.findBySigla(sigla).stream().map(estado-> EstadoResponseDTO.valueOf(estado)).toList();
+        return estadoRepository
+                .findBySigla(sigla)
+                .stream()
+                .map(estado-> EstadoResponseDTO.valueOf(estado))
+                .toList();
     }
 }

@@ -4,10 +4,12 @@ import br.unitins.topicos1.dto.CidadeDTO;
 import br.unitins.topicos1.dto.CidadeResponseDTO;
 import br.unitins.topicos1.model.Cidade;
 import br.unitins.topicos1.repository.CidadeRepository;
+import br.unitins.topicos1.service.CidadeService;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 
@@ -16,57 +18,42 @@ import java.util.List;
 @Path("/Cidades")
 public class CidadeResource {
     @Inject
-    public CidadeRepository cidadeRepository;
+    public CidadeService cidadeService;
 
     @GET
     @Path("/{id}")
-    public CidadeResponseDTO findById(@PathParam("id") Long id){
-        return CidadeResponseDTO.valueOf(cidadeRepository.findById(id));
+    public Response findById(@PathParam("id") Long id){
+        return Response.ok(cidadeService.findById(id)).build();
     }
 
     @GET
     @Path("/search/nome/{nome}")
-    public List<CidadeResponseDTO> findByNome(@PathParam("nome") String nome){
-        return cidadeRepository.findByNome(nome).stream().map(cidade -> CidadeResponseDTO.valueOf(cidade)).toList();
+    public Response findByNome(@PathParam("nome") String nome){
+        return Response.ok(cidadeService.findByNome(nome)).build();
     }
 
     @GET
-    public List<CidadeResponseDTO> findAll(){
-//        Opcao 1: forma de passar a informação do CidadeRepository.listAll() pelo ResponseDTO
-//
-//        List<Cidade> lista = CidadeRepository.listAll();
-//        List<CidadeResponseDTO> listaDTO = new ArrayList<CidadeResponseDTO>();
-//        for(Cidade Cidade : lista){
-//            listaDTO.add(CidadeResponseDTO.valueOf(Cidade));
-//        }
-//        return listaDTO;
-//
-//      Opcao 2:
-        return cidadeRepository.listAll().stream().map(Cidade -> CidadeResponseDTO.valueOf(Cidade)).toList();
+    public Response findAll(){
+        return Response.ok(cidadeService.findAll()).build();
     }
 
     @POST
     @Transactional
-    public CidadeResponseDTO create (CidadeDTO dto){
-        Cidade cidade = new Cidade();
-        cidade.setNome(dto.nome());
-
-        cidadeRepository.persist(cidade);
-        return CidadeResponseDTO.valueOf(cidade);
+    public Response create (CidadeDTO dto){
+        return Response.ok(cidadeService.create(dto)).build();
     }
 
     @PUT
     @Transactional
     @Path("/{id}")
     public void update(@PathParam("id") Long id, CidadeDTO dto){
-        Cidade cidadeBanco = cidadeRepository.findById(id);
-        cidadeBanco.setNome(dto.nome());
+        cidadeService.update(id, dto);
     }
 
     @DELETE
     @Transactional
     @Path("/{id}")
     public void delete(@PathParam("id") Long id){
-        cidadeRepository.deleteById(id);
+        cidadeService.delete(id);
     }
 }

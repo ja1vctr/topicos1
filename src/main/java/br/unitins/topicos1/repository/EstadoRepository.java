@@ -18,7 +18,7 @@ public class EstadoRepository implements PanacheRepository<Estado> {
     }
 
     public Estado findByNomeCompleto(String nome){
-        return find("UPPER(nome) = ?1", nome.toUpperCase()).firstResult();
+        return find("UPPER(nome) = ?1",  nome.toUpperCase()).firstResult();
     }
 
 }

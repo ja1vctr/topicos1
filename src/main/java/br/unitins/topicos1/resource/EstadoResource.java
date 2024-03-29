@@ -22,6 +22,7 @@ public class EstadoResource {
     @GET
     @Path("/{id}")
     public Response findById(@PathParam("id") Long id){
+
         return Response.ok(estatdoService.findById(id)).build();
     }
 

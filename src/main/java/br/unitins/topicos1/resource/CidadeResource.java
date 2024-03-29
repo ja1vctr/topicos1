@@ -7,6 +7,7 @@ import br.unitins.topicos1.repository.CidadeRepository;
 import br.unitins.topicos1.service.CidadeService;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -39,7 +40,7 @@ public class CidadeResource {
 
     @POST
     @Transactional
-    public Response create (CidadeDTO dto){
+    public Response create (@Valid CidadeDTO dto){
         return Response.ok(cidadeService.create(dto)).build();
     }
 

@@ -5,6 +5,7 @@ import br.unitins.topicos1.dto.CidadeResponseDTO;
 import br.unitins.topicos1.model.Cidade;
 import br.unitins.topicos1.repository.CidadeRepository;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class CidadeServiceImpl implements CidadeService{
     }
 
     @Override
-    public CidadeResponseDTO create(CidadeDTO dto) {
+    public CidadeResponseDTO create(@Valid CidadeDTO dto) {
         Cidade cidade = new Cidade();
         cidade.setNome(dto.nome());
 

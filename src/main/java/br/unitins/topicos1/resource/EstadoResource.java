@@ -35,9 +35,7 @@ public class EstadoResource {
     @GET
     @Path("/search/sigla/{sigla}")
     public Response findBySigla(@PathParam("sigla") String sigla){
-        return Response
-                .ok(estatdoService.findBySigla(sigla))
-                .build();
+        return Response.ok(estatdoService.findBySigla(sigla)).build();
     }
 
     @GET
@@ -52,13 +50,11 @@ public class EstadoResource {
 //        return listaDTO;
 //
 //      Opcao 2:
-        return Response
-                .ok(estatdoService.findAll())
-                .build();
+        return Response.ok(estatdoService.findAll()).build();
     }
 
     @POST
-    public Response create (@Valid EstadoDTO dto){
+    public Response create (EstadoDTO dto){
         return Response
                 .status(201).entity(estatdoService.create(dto))
                 .build();

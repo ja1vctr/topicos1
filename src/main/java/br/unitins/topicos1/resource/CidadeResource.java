@@ -40,21 +40,30 @@ public class CidadeResource {
 
     @POST
     @Transactional
-    public Response create (@Valid CidadeDTO dto){
-        return Response.ok(cidadeService.create(dto)).build();
+    public Response create (CidadeDTO dto){
+        return Response
+                .status(Response.Status.CREATED)
+                .entity(cidadeService.create(dto))
+                .build();
     }
 
     @PUT
     @Transactional
     @Path("/{id}")
-    public void update(@PathParam("id") Long id, CidadeDTO dto){
+    public Response update(@PathParam("id") Long id, CidadeDTO dto){
         cidadeService.update(id, dto);
+        return Response
+                .status(Response.Status.NO_CONTENT)
+                .build();
     }
 
     @DELETE
     @Transactional
     @Path("/{id}")
-    public void delete(@PathParam("id") Long id){
+    public Response delete(@PathParam("id") Long id){
         cidadeService.delete(id);
+        return Response
+                .status(Response.Status.NO_CONTENT)
+                .build();
     }
 }
